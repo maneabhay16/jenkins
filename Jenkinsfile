@@ -11,20 +11,24 @@ pipeline {
                 checkout scm
             }
         }
+
         stage('Setup Python') {
             steps {
                 sh '''
-                python3 -m venv venv
-                source venv/bin/activate
-                pip install -r requirements.txt
+                    #!/bin/bash
+                    python3 -m venv venv
+                    source venv/bin/activate
+                    pip install -r requirements.txt
                 '''
             }
         }
+
         stage('Run Tests') {
             steps {
                 sh '''
-                source venv/bin/activate
-                python manage.py test
+                    #!/bin/bash
+                    source venv/bin/activate
+                    python manage.py test
                 '''
             }
         }
