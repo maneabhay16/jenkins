@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+ENV = os.getenv("DJANGO_ENV", "dev")  # fallback to 'dev'
+print(f"⚙️  Running in {ENV} mode")
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +25,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*qu*^&(fwus+5&^5=1!2cu+q-6xny@n9)mu(bro(=$u_v7!1c9'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dummy_dev_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENV == "prod":
+    DEBUG = False
+    ALLOWED_HOSTS = ["your-prod-domain.com"]
+elif ENV == "staging":
+    DEBUG = False
+    ALLOWED_HOSTS = ["your-staging-domain.com"]
+else:  # dev
+    DEBUG = True
+    ALLOWED_HOSTS = ["*"]
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
