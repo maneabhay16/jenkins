@@ -13,10 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
-STATIC_URL = 'static/'
 
-# 👇 Add this below STATIC_URL
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # recommended
 
 ENV = os.getenv("DJANGO_ENV", "dev")  # fallback to 'dev'
 print(f"⚙️  Running in {ENV} mode")
@@ -24,6 +21,10 @@ print(f"⚙️  Running in {ENV} mode")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_URL = 'static/'
+
+# 👇 Add this below STATIC_URL
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # recommended
 
 
 # Quick-start development settings - unsuitable for production
