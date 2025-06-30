@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
+STATIC_URL = 'static/'
+
+# 👇 Add this below STATIC_URL
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # recommended
+
 ENV = os.getenv("DJANGO_ENV", "dev")  # fallback to 'dev'
 print(f"⚙️  Running in {ENV} mode")
 
